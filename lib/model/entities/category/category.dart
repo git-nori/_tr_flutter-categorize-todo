@@ -12,4 +12,8 @@ abstract class Category with _$Category {
     @Default(<Todo>[]) List<Todo> todoList,
   }) = _Category;
   Category._();
+
+  @late
+  int get notCompletedTodoCnt =>
+      todoList.where((element) => !element.isDone).toList().length;
 }

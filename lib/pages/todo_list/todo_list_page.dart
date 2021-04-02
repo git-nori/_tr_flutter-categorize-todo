@@ -69,7 +69,7 @@ class _TodoListPageState extends State<TodoListPage>
                   .select((CategoryListState state) => state.categoryList)
                   .map((e) => _Tab(
                         title: e.title,
-                        totalCnt: e.todoList.length,
+                        totalCnt: e.notCompletedTodoCnt,
                       ))
                   .toList(),
             ),

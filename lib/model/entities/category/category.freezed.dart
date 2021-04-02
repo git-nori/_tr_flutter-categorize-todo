@@ -117,9 +117,22 @@ class _$_Category extends _Category {
   @override
   final List<Todo> todoList;
 
+  bool _didnotCompletedTodoCnt = false;
+  int _notCompletedTodoCnt;
+
+  @override
+  int get notCompletedTodoCnt {
+    if (_didnotCompletedTodoCnt == false) {
+      _didnotCompletedTodoCnt = true;
+      _notCompletedTodoCnt =
+          todoList.where((element) => !element.isDone).toList().length;
+    }
+    return _notCompletedTodoCnt;
+  }
+
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, todoList: $todoList)';
+    return 'Category(id: $id, title: $title, todoList: $todoList, notCompletedTodoCnt: $notCompletedTodoCnt)';
   }
 
   @override
