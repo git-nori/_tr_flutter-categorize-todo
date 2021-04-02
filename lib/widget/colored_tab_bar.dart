@@ -8,7 +8,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Ink(
       color: color,
-      child: tabBar,
+      child: Align(alignment: Alignment.centerLeft, child: tabBar),
     );
   }
 
