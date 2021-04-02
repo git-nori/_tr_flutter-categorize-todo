@@ -14,9 +14,10 @@ class _$TodoListTabStateTearOff {
   const _$TodoListTabStateTearOff();
 
 // ignore: unused_element
-  _TodoListTabState call({int currentIndex = 0}) {
+  _TodoListTabState call({int currentIndex = 0, TabController tabController}) {
     return _TodoListTabState(
       currentIndex: currentIndex,
+      tabController: tabController,
     );
   }
 }
@@ -28,6 +29,7 @@ const $TodoListTabState = _$TodoListTabStateTearOff();
 /// @nodoc
 mixin _$TodoListTabState {
   int get currentIndex;
+  TabController get tabController;
 
   @JsonKey(ignore: true)
   $TodoListTabStateCopyWith<TodoListTabState> get copyWith;
@@ -38,7 +40,7 @@ abstract class $TodoListTabStateCopyWith<$Res> {
   factory $TodoListTabStateCopyWith(
           TodoListTabState value, $Res Function(TodoListTabState) then) =
       _$TodoListTabStateCopyWithImpl<$Res>;
-  $Res call({int currentIndex});
+  $Res call({int currentIndex, TabController tabController});
 }
 
 /// @nodoc
@@ -53,10 +55,14 @@ class _$TodoListTabStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object currentIndex = freezed,
+    Object tabController = freezed,
   }) {
     return _then(_value.copyWith(
       currentIndex:
           currentIndex == freezed ? _value.currentIndex : currentIndex as int,
+      tabController: tabController == freezed
+          ? _value.tabController
+          : tabController as TabController,
     ));
   }
 }
@@ -68,7 +74,7 @@ abstract class _$TodoListTabStateCopyWith<$Res>
           _TodoListTabState value, $Res Function(_TodoListTabState) then) =
       __$TodoListTabStateCopyWithImpl<$Res>;
   @override
-  $Res call({int currentIndex});
+  $Res call({int currentIndex, TabController tabController});
 }
 
 /// @nodoc
@@ -85,27 +91,33 @@ class __$TodoListTabStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object currentIndex = freezed,
+    Object tabController = freezed,
   }) {
     return _then(_TodoListTabState(
       currentIndex:
           currentIndex == freezed ? _value.currentIndex : currentIndex as int,
+      tabController: tabController == freezed
+          ? _value.tabController
+          : tabController as TabController,
     ));
   }
 }
 
 /// @nodoc
 class _$_TodoListTabState extends _TodoListTabState {
-  _$_TodoListTabState({this.currentIndex = 0})
+  _$_TodoListTabState({this.currentIndex = 0, this.tabController})
       : assert(currentIndex != null),
         super._();
 
   @JsonKey(defaultValue: 0)
   @override
   final int currentIndex;
+  @override
+  final TabController tabController;
 
   @override
   String toString() {
-    return 'TodoListTabState(currentIndex: $currentIndex)';
+    return 'TodoListTabState(currentIndex: $currentIndex, tabController: $tabController)';
   }
 
   @override
@@ -114,12 +126,17 @@ class _$_TodoListTabState extends _TodoListTabState {
         (other is _TodoListTabState &&
             (identical(other.currentIndex, currentIndex) ||
                 const DeepCollectionEquality()
-                    .equals(other.currentIndex, currentIndex)));
+                    .equals(other.currentIndex, currentIndex)) &&
+            (identical(other.tabController, tabController) ||
+                const DeepCollectionEquality()
+                    .equals(other.tabController, tabController)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(currentIndex);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(currentIndex) ^
+      const DeepCollectionEquality().hash(tabController);
 
   @JsonKey(ignore: true)
   @override
@@ -129,10 +146,13 @@ class _$_TodoListTabState extends _TodoListTabState {
 
 abstract class _TodoListTabState extends TodoListTabState {
   _TodoListTabState._() : super._();
-  factory _TodoListTabState({int currentIndex}) = _$_TodoListTabState;
+  factory _TodoListTabState({int currentIndex, TabController tabController}) =
+      _$_TodoListTabState;
 
   @override
   int get currentIndex;
+  @override
+  TabController get tabController;
   @override
   @JsonKey(ignore: true)
   _$TodoListTabStateCopyWith<_TodoListTabState> get copyWith;

@@ -2,6 +2,8 @@ import 'package:flutter_firebase_todo/model/controller/category_list_controller/
 import 'package:flutter_firebase_todo/model/model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
+import '../todo_list_tab_state.dart';
+
 class TodoTileController extends StateNotifier<void> with LocatorMixin {
   TodoTileController({int todoId}) : super(null) {
     _todoId = todoId;
@@ -20,7 +22,7 @@ class TodoTileController extends StateNotifier<void> with LocatorMixin {
   @override
   void update(Locator watch) {
     super.update(watch);
-    _categoryId = watch<int>() + 1;
+    _categoryId = watch<TodoListTabState>().currentIndex + 1;
   }
 
   @override

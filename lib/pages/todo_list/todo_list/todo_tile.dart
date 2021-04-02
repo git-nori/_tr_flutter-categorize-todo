@@ -8,11 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TodoTile extends StatelessWidget {
-  // const TodoTile({
-  //   Key key,
-  //   @required this.todo,
-  // }) : super(key: key);
-  // final Todo todo;
   const TodoTile({this.id});
   final int id;
   @override
