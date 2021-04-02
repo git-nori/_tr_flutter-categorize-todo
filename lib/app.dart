@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/home/todo_list_page.dart';
+import 'pages/category_list/category_list_page.dart';
+import 'pages/todo_list/todo_list_page.dart';
 
 class App extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
             initialRoute: TodoListPage.rootId,
             routes: {
               TodoListPage.rootId: (context) => TodoListPage(),
+              CategoryListPage.rootId: (context) => CategoryListPage(),
             },
           );
         }

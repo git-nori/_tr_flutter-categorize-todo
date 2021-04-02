@@ -15,8 +15,12 @@ class _$TodoTearOff {
 
 // ignore: unused_element
   _Todo call(
-      {@required String title, @required bool isDone, DateTime rimitDateTime}) {
+      {@required int id,
+      @required String title,
+      @required bool isDone,
+      DateTime rimitDateTime}) {
     return _Todo(
+      id: id,
       title: title,
       isDone: isDone,
       rimitDateTime: rimitDateTime,
@@ -30,6 +34,7 @@ const $Todo = _$TodoTearOff();
 
 /// @nodoc
 mixin _$Todo {
+  int get id;
   String get title;
   bool get isDone;
   DateTime get rimitDateTime;
@@ -42,7 +47,7 @@ mixin _$Todo {
 abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res>;
-  $Res call({String title, bool isDone, DateTime rimitDateTime});
+  $Res call({int id, String title, bool isDone, DateTime rimitDateTime});
 }
 
 /// @nodoc
@@ -55,11 +60,13 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
     Object isDone = freezed,
     Object rimitDateTime = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       isDone: isDone == freezed ? _value.isDone : isDone as bool,
       rimitDateTime: rimitDateTime == freezed
@@ -74,7 +81,7 @@ abstract class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   factory _$TodoCopyWith(_Todo value, $Res Function(_Todo) then) =
       __$TodoCopyWithImpl<$Res>;
   @override
-  $Res call({String title, bool isDone, DateTime rimitDateTime});
+  $Res call({int id, String title, bool isDone, DateTime rimitDateTime});
 }
 
 /// @nodoc
@@ -88,11 +95,13 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
     Object isDone = freezed,
     Object rimitDateTime = freezed,
   }) {
     return _then(_Todo(
+      id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       isDone: isDone == freezed ? _value.isDone : isDone as bool,
       rimitDateTime: rimitDateTime == freezed
@@ -104,11 +113,18 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Todo extends _Todo {
-  _$_Todo({@required this.title, @required this.isDone, this.rimitDateTime})
-      : assert(title != null),
+  _$_Todo(
+      {@required this.id,
+      @required this.title,
+      @required this.isDone,
+      this.rimitDateTime})
+      : assert(id != null),
+        assert(title != null),
         assert(isDone != null),
         super._();
 
+  @override
+  final int id;
   @override
   final String title;
   @override
@@ -118,13 +134,15 @@ class _$_Todo extends _Todo {
 
   @override
   String toString() {
-    return 'Todo(title: $title, isDone: $isDone, rimitDateTime: $rimitDateTime)';
+    return 'Todo(id: $id, title: $title, isDone: $isDone, rimitDateTime: $rimitDateTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Todo &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.isDone, isDone) ||
@@ -137,6 +155,7 @@ class _$_Todo extends _Todo {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(isDone) ^
       const DeepCollectionEquality().hash(rimitDateTime);
@@ -150,10 +169,13 @@ class _$_Todo extends _Todo {
 abstract class _Todo extends Todo {
   _Todo._() : super._();
   factory _Todo(
-      {@required String title,
+      {@required int id,
+      @required String title,
       @required bool isDone,
       DateTime rimitDateTime}) = _$_Todo;
 
+  @override
+  int get id;
   @override
   String get title;
   @override

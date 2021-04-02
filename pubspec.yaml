@@ -16,9 +16,10 @@ dependencies:
   firebase_core: "^0.7.0"
   flutter:
     sdk: flutter
-  flutter_riverpod: ^0.13.1+1
   freezed_annotation:
   intl: ^0.16.1
+  provider:
+  flutter_state_notifier:
 
 dev_dependencies:
   build_runner:

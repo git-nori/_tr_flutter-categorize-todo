@@ -14,10 +14,14 @@ class _$CategoryTearOff {
   const _$CategoryTearOff();
 
 // ignore: unused_element
-  _Category call({@required String title, List<Todo> todos = const <Todo>[]}) {
+  _Category call(
+      {@required int id,
+      @required String title,
+      List<Todo> todoList = const <Todo>[]}) {
     return _Category(
+      id: id,
       title: title,
-      todos: todos,
+      todoList: todoList,
     );
   }
 }
@@ -28,8 +32,9 @@ const $Category = _$CategoryTearOff();
 
 /// @nodoc
 mixin _$Category {
+  int get id;
   String get title;
-  List<Todo> get todos;
+  List<Todo> get todoList;
 
   @JsonKey(ignore: true)
   $CategoryCopyWith<Category> get copyWith;
@@ -39,7 +44,7 @@ mixin _$Category {
 abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res>;
-  $Res call({String title, List<Todo> todos});
+  $Res call({int id, String title, List<Todo> todoList});
 }
 
 /// @nodoc
@@ -52,12 +57,14 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
-    Object todos = freezed,
+    Object todoList = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
-      todos: todos == freezed ? _value.todos : todos as List<Todo>,
+      todoList: todoList == freezed ? _value.todoList : todoList as List<Todo>,
     ));
   }
 }
@@ -67,7 +74,7 @@ abstract class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) then) =
       __$CategoryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, List<Todo> todos});
+  $Res call({int id, String title, List<Todo> todoList});
 }
 
 /// @nodoc
@@ -81,49 +88,59 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object title = freezed,
-    Object todos = freezed,
+    Object todoList = freezed,
   }) {
     return _then(_Category(
+      id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
-      todos: todos == freezed ? _value.todos : todos as List<Todo>,
+      todoList: todoList == freezed ? _value.todoList : todoList as List<Todo>,
     ));
   }
 }
 
 /// @nodoc
 class _$_Category extends _Category {
-  _$_Category({@required this.title, this.todos = const <Todo>[]})
-      : assert(title != null),
-        assert(todos != null),
+  _$_Category(
+      {@required this.id, @required this.title, this.todoList = const <Todo>[]})
+      : assert(id != null),
+        assert(title != null),
+        assert(todoList != null),
         super._();
 
+  @override
+  final int id;
   @override
   final String title;
   @JsonKey(defaultValue: const <Todo>[])
   @override
-  final List<Todo> todos;
+  final List<Todo> todoList;
 
   @override
   String toString() {
-    return 'Category(title: $title, todos: $todos)';
+    return 'Category(id: $id, title: $title, todoList: $todoList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Category &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.todos, todos) ||
-                const DeepCollectionEquality().equals(other.todos, todos)));
+            (identical(other.todoList, todoList) ||
+                const DeepCollectionEquality()
+                    .equals(other.todoList, todoList)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(todos);
+      const DeepCollectionEquality().hash(todoList);
 
   @JsonKey(ignore: true)
   @override
@@ -133,12 +150,17 @@ class _$_Category extends _Category {
 
 abstract class _Category extends Category {
   _Category._() : super._();
-  factory _Category({@required String title, List<Todo> todos}) = _$_Category;
+  factory _Category(
+      {@required int id,
+      @required String title,
+      List<Todo> todoList}) = _$_Category;
 
+  @override
+  int get id;
   @override
   String get title;
   @override
-  List<Todo> get todos;
+  List<Todo> get todoList;
   @override
   @JsonKey(ignore: true)
   _$CategoryCopyWith<_Category> get copyWith;

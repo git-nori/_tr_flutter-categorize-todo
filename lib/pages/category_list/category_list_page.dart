@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_todo/model/controller/tabs_controller/tabs_controller.dart';
-import 'package:flutter_firebase_todo/widget/round_button.dart';
-import 'package:flutter_firebase_todo/widget/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_controller.dart';
+import 'package:flutter_firebase_todo/pages/todo_list/todo_list/todo_list.dart';
+import 'package:flutter_firebase_todo/widget/colored_tab_bar.dart';
+import 'package:flutter_firebase_todo/widget/floating_action_button.dart';
+import 'package:provider/provider.dart';
 
-import 'todo_list/todo_list.dart';
-
-class TodoListPage extends ConsumerWidget {
-  static const rootId = '/home';
+class CategoryListPage extends StatelessWidget {
+  static const rootId = '/category_list';
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final tabsState = watch(tabsProvider.state);
+  Widget build(BuildContext context) {
     return DefaultTabController(
-      length: tabsState.categories.length,
+      length: context
+          .select((CategoryListState state) => state.categoryList.length),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey.shade800,
@@ -52,46 +51,19 @@ class TodoListPage extends ConsumerWidget {
               indicatorColor: Colors.white,
               isScrollable: true,
               indicatorWeight: 3,
-              tabs: tabsState.categories
+              tabs: context
+                  .select((CategoryListState state) => state.categoryList)
                   .map((e) => _Tab(
                         title: e.title,
-                        totalCnt: e.todos.length,
+                        totalCnt: e.todoList.length,
                       ))
                   .toList(),
             ),
           ),
         ),
-        body: _TabBarView(tabsState: tabsState),
+        body: _TabBarView(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleButton(
-                size: 60,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade800,
-                  ),
-                  onPressed: () {},
-                  child: const Icon(Icons.delete_outline),
-                ),
-              ),
-              CircleButton(
-                size: 60,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
-                  onPressed: () {},
-                  child: const Icon(
-                    Icons.edit_outlined,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        floatingActionButton: const FloatingActionBtn(),
       ),
     );
   }
@@ -134,15 +106,15 @@ class _Tab extends StatelessWidget {
 }
 
 class _TabBarView extends StatelessWidget {
-  const _TabBarView({@required this.tabsState});
-  final TabsState tabsState;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
       child: TabBarView(
-        children:
-            tabsState.categories.map((e) => TodoList(todos: e.todos)).toList(),
+        children: context
+            .select((CategoryListState state) => state.categoryList)
+            .map((e) => TodoList(todoList: e.todoList))
+            .toList(),
       ),
     );
   }
