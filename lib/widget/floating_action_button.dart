@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_controller.dart';
+import 'package:flutter_firebase_todo/pages/todo_list/todo_list_tab_state.dart';
+import 'package:provider/provider.dart';
 
 import 'round_button.dart';
 
@@ -20,7 +23,12 @@ class FloatingActionBtn extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey.shade800,
               ),
-              onPressed: () {},
+              onPressed: () {
+                final categoryId = context.read<TodoListTabState>().categoryId;
+                context
+                    .read<CategoryListController>()
+                    .deleteCompletedTodoList(categoryId: categoryId);
+              },
               child: const Icon(Icons.delete_outline),
             ),
           ),

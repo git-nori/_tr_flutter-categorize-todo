@@ -10,4 +10,7 @@ abstract class TodoListTabState with _$TodoListTabState {
     TabController tabController,
   }) = _TodoListTabState;
   TodoListTabState._();
+
+  @late
+  int get categoryId => currentIndex + 1;
 }

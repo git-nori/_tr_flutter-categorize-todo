@@ -88,6 +88,16 @@ class CategoryListController extends StateNotifier<CategoryListState> {
     updateCategory(category: updatedCategory);
   }
 
+  void deleteCompletedTodoList({int categoryId}) {
+    final category = getCategory(categoryId: categoryId);
+    final todoIdList = category.completedTodoList.map((e) => e.id);
+    final updatedTodoList = category.todoList
+        .where((element) => !todoIdList.contains(element.id))
+        .toList();
+    final updatedCategory = category.copyWith(todoList: updatedTodoList);
+    updateCategory(category: updatedCategory);
+  }
+
   void updateCategory({Category category}) {
     final updatedCategoryList = state.categoryList.map((e) {
       if (e.id != category.id) {

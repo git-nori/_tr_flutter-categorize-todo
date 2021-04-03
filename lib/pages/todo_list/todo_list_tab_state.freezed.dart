@@ -115,9 +115,21 @@ class _$_TodoListTabState extends _TodoListTabState {
   @override
   final TabController tabController;
 
+  bool _didcategoryId = false;
+  int _categoryId;
+
+  @override
+  int get categoryId {
+    if (_didcategoryId == false) {
+      _didcategoryId = true;
+      _categoryId = currentIndex + 1;
+    }
+    return _categoryId;
+  }
+
   @override
   String toString() {
-    return 'TodoListTabState(currentIndex: $currentIndex, tabController: $tabController)';
+    return 'TodoListTabState(currentIndex: $currentIndex, tabController: $tabController, categoryId: $categoryId)';
   }
 
   @override

@@ -130,9 +130,21 @@ class _$_Category extends _Category {
     return _notCompletedTodoCnt;
   }
 
+  bool _didcompletedTodoList = false;
+  List<Todo> _completedTodoList;
+
+  @override
+  List<Todo> get completedTodoList {
+    if (_didcompletedTodoList == false) {
+      _didcompletedTodoList = true;
+      _completedTodoList = todoList.where((element) => element.isDone).toList();
+    }
+    return _completedTodoList;
+  }
+
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, todoList: $todoList, notCompletedTodoCnt: $notCompletedTodoCnt)';
+    return 'Category(id: $id, title: $title, todoList: $todoList, notCompletedTodoCnt: $notCompletedTodoCnt, completedTodoList: $completedTodoList)';
   }
 
   @override

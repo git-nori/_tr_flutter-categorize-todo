@@ -16,4 +16,8 @@ abstract class Category with _$Category {
   @late
   int get notCompletedTodoCnt =>
       todoList.where((element) => !element.isDone).toList().length;
+
+  @late
+  List<Todo> get completedTodoList =>
+      todoList.where((element) => element.isDone).toList();
 }
