@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_todo/model/model.dart';
-import 'package:provider/provider.dart';
 
 import 'todo_tile.dart';
 

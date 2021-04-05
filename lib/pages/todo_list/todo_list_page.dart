@@ -19,9 +19,12 @@ class _TodoListPageState extends State<TodoListPage>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    final length =
+        context.select((CategoryListState state) => state.categoryList.length);
     return StateNotifierProvider<TodoListTabController, TodoListTabState>(
       create: (BuildContext context) => TodoListTabController(TabController(
-        length: context.read<CategoryListState>().categoryList.length,
+        // length: context.read<CategoryListState>().categoryList.length,
+        length: length,
         vsync: this,
       )),
       builder: (context, child) => Scaffold(

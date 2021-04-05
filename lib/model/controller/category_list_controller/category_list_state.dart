@@ -11,4 +11,8 @@ abstract class CategoryListState with _$CategoryListState {
     @Default(<Category>[]) List<Category> categoryList,
   }) = _CategoryListState;
   CategoryListState._();
+  List<String> get allCategoryTitle =>
+      categoryList.map((e) => e.title).toList();
+  Category getCategory(int categoryId) =>
+      categoryList.firstWhereOrNull((element) => element.id == categoryId);
 }

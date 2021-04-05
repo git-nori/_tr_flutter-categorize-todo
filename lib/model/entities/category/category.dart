@@ -20,4 +20,7 @@ abstract class Category with _$Category {
   @late
   List<Todo> get completedTodoList =>
       todoList.where((element) => element.isDone).toList();
+  Todo getTodo(int todoId) {
+    return todoList.firstWhereOrNull((element) => element.id == todoId);
+  }
 }
