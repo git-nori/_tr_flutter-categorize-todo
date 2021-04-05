@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_todo/consts/style.dart';
 import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_controller.dart';
 import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_state.dart';
-import 'package:flutter_firebase_todo/pages/todo_list/todo_list_tab_state.dart';
 import 'package:flutter_firebase_todo/widget/zero_divider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({this.id});
+  const TodoTile({this.id, this.categoryId});
   final int id;
+  final int categoryId;
   @override
   Widget build(BuildContext context) {
     final formatter = DateFormat('M月dd日(E) HH:mm', 'ja_JP');
-    final categoryId =
-        context.select((TodoListTabState state) => state.categoryId);
     final todo = context.select(
         (CategoryListState state) => state.getCategory(categoryId).getTodo(id));
     return Column(

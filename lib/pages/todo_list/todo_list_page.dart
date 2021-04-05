@@ -85,7 +85,7 @@ class _TodoListPageState extends State<TodoListPage>
                 context.select((TodoListTabState state) => state.tabController),
             children: context
                 .select((CategoryListState state) => state.categoryList)
-                .map((e) => TodoList(todoList: e.todoList))
+                .map((e) => TodoList(todoList: e.todoList, categoryId: e.id))
                 .toList(),
           ),
         ),
