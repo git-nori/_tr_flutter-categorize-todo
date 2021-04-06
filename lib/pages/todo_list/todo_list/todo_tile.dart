@@ -8,8 +8,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({this.id});
+  const TodoTile({Key key, this.id}) : super(key: key);
   final int id;
+
   @override
   Widget build(BuildContext context) {
     final formatter = DateFormat('M月dd日(E) HH:mm', 'ja_JP');
