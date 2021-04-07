@@ -12,17 +12,21 @@ final mockedList = [
         id: 1,
         title: 'Category1 todo1',
         isDone: true,
-        rimitDateTime: DateTime.now().add(const Duration(hours: 1)),
+        limitDateTime: DateTime.now().add(const Duration(hours: 1)),
+        isSelectedTime: true,
       ),
       Todo(
         id: 2,
         title: 'Category1 todo2',
         isDone: false,
+        limitDateTime: DateTime.now().add(const Duration(hours: 1)),
+        isSelectedTime: false,
       ),
       Todo(
         id: 3,
         title: 'Category1 todo3',
         isDone: false,
+        isSelectedTime: false,
       ),
     ],
   ),
@@ -34,11 +38,13 @@ final mockedList = [
         id: 4,
         title: 'Category2 todo2',
         isDone: true,
+        isSelectedTime: false,
       ),
       Todo(
         id: 5,
         title: 'Category2 todo3',
         isDone: false,
+        isSelectedTime: false,
       ),
     ],
   ),
@@ -50,6 +56,7 @@ final mockedList = [
         id: 6,
         title: 'Category3 todo3',
         isDone: true,
+        isSelectedTime: false,
       ),
     ],
   ),
@@ -57,6 +64,21 @@ final mockedList = [
 
 class CategoryListController extends StateNotifier<CategoryListState> {
   CategoryListController() : super(CategoryListState(categoryList: mockedList));
+
+  void addTodo(int categoryId, String title, DateTime limitedDateTime,
+      {bool isSelectedTime = false}) {
+    final category = state.getCategory(categoryId: categoryId);
+    final updatedTodo = Todo(
+      id: category.nextTodoId,
+      title: title,
+      isDone: false,
+      limitDateTime: limitedDateTime,
+      isSelectedTime: isSelectedTime,
+    );
+    final updatedTodoList = [...category.todoList, updatedTodo];
+    final updatedCategory = category.copyWith(todoList: updatedTodoList);
+    updateCategory(category: updatedCategory);
+  }
 
   void updateTodo({int categoryId, Todo todo}) {
     final category = state.getCategory(categoryId: categoryId);

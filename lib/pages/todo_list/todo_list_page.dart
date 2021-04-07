@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_controller.dart';
 import 'package:flutter_firebase_todo/pages/todo_list/todo_list/todo_list.dart';
-import 'package:flutter_firebase_todo/pages/todo_list/todo_list_tab_controller.dart';
-import 'package:flutter_firebase_todo/pages/todo_list/todo_list_tab_state.dart';
 import 'package:flutter_firebase_todo/widget/colored_tab_bar.dart';
 import 'package:flutter_firebase_todo/widget/floating_action_button.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -17,13 +14,26 @@ class TodoListPage extends StatefulWidget {
 
 class _TodoListPageState extends State<TodoListPage>
     with TickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final length =
+        context.select((CategoryListState state) => state.categoryList.length);
+    _tabController = TabController(length: length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StateNotifierProvider<TodoListTabController, TodoListTabState>(
-      create: (BuildContext context) => TodoListTabController(TabController(
-        length: context.read<CategoryListState>().categoryList.length,
-        vsync: this,
-      )),
+    return ChangeNotifierProvider.value(
+      value: _tabController,
       builder: (context, child) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey.shade800,
@@ -60,8 +70,7 @@ class _TodoListPageState extends State<TodoListPage>
           bottom: ColoredTabBar(
             color: Colors.black,
             tabBar: TabBar(
-              controller: context
-                  .select((TodoListTabState state) => state.tabController),
+              controller: context.select((TabController state) => state),
               indicatorColor: Colors.white,
               indicatorWeight: 3,
               isScrollable: true,
@@ -78,11 +87,11 @@ class _TodoListPageState extends State<TodoListPage>
         body: Container(
           color: Colors.black,
           child: TabBarView(
-            controller:
-                context.select((TodoListTabState state) => state.tabController),
+            controller: context.select((TabController state) => state),
             children: context
                 .select((CategoryListState state) => state.categoryList)
                 .map((e) => TodoList(
+                      key: ValueKey(e.id),
                       todoList: e.todoList,
                       categoryId: e.id,
                     ))

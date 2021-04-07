@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../model.dart';
@@ -20,6 +22,11 @@ abstract class Category with _$Category {
   @late
   List<Todo> get completedTodoList =>
       todoList.where((element) => element.isDone).toList();
+
+  @late
+  int get nextTodoId =>
+      todoList.isEmpty ? 1 : todoList.map((e) => e.id).reduce(max) + 1;
+
   Todo getTodo({int todoId}) =>
       todoList.firstWhereOrNull((element) => element.id == todoId);
 }

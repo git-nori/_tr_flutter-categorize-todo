@@ -142,9 +142,22 @@ class _$_Category extends _Category {
     return _completedTodoList;
   }
 
+  bool _didnextTodoId = false;
+  int _nextTodoId;
+
+  @override
+  int get nextTodoId {
+    if (_didnextTodoId == false) {
+      _didnextTodoId = true;
+      _nextTodoId =
+          todoList.isEmpty ? 1 : todoList.map((e) => e.id).reduce(max) + 1;
+    }
+    return _nextTodoId;
+  }
+
   @override
   String toString() {
-    return 'Category(id: $id, title: $title, todoList: $todoList, notCompletedTodoCnt: $notCompletedTodoCnt, completedTodoList: $completedTodoList)';
+    return 'Category(id: $id, title: $title, todoList: $todoList, notCompletedTodoCnt: $notCompletedTodoCnt, completedTodoList: $completedTodoList, nextTodoId: $nextTodoId)';
   }
 
   @override

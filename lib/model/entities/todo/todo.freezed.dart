@@ -18,12 +18,14 @@ class _$TodoTearOff {
       {@required int id,
       @required String title,
       @required bool isDone,
-      DateTime rimitDateTime}) {
+      @required bool isSelectedTime,
+      DateTime limitDateTime}) {
     return _Todo(
       id: id,
       title: title,
       isDone: isDone,
-      rimitDateTime: rimitDateTime,
+      isSelectedTime: isSelectedTime,
+      limitDateTime: limitDateTime,
     );
   }
 }
@@ -37,7 +39,8 @@ mixin _$Todo {
   int get id;
   String get title;
   bool get isDone;
-  DateTime get rimitDateTime;
+  bool get isSelectedTime;
+  DateTime get limitDateTime;
 
   @JsonKey(ignore: true)
   $TodoCopyWith<Todo> get copyWith;
@@ -47,7 +50,12 @@ mixin _$Todo {
 abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res>;
-  $Res call({int id, String title, bool isDone, DateTime rimitDateTime});
+  $Res call(
+      {int id,
+      String title,
+      bool isDone,
+      bool isSelectedTime,
+      DateTime limitDateTime});
 }
 
 /// @nodoc
@@ -63,15 +71,19 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
     Object id = freezed,
     Object title = freezed,
     Object isDone = freezed,
-    Object rimitDateTime = freezed,
+    Object isSelectedTime = freezed,
+    Object limitDateTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       isDone: isDone == freezed ? _value.isDone : isDone as bool,
-      rimitDateTime: rimitDateTime == freezed
-          ? _value.rimitDateTime
-          : rimitDateTime as DateTime,
+      isSelectedTime: isSelectedTime == freezed
+          ? _value.isSelectedTime
+          : isSelectedTime as bool,
+      limitDateTime: limitDateTime == freezed
+          ? _value.limitDateTime
+          : limitDateTime as DateTime,
     ));
   }
 }
@@ -81,7 +93,12 @@ abstract class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   factory _$TodoCopyWith(_Todo value, $Res Function(_Todo) then) =
       __$TodoCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String title, bool isDone, DateTime rimitDateTime});
+  $Res call(
+      {int id,
+      String title,
+      bool isDone,
+      bool isSelectedTime,
+      DateTime limitDateTime});
 }
 
 /// @nodoc
@@ -98,15 +115,19 @@ class __$TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
     Object id = freezed,
     Object title = freezed,
     Object isDone = freezed,
-    Object rimitDateTime = freezed,
+    Object isSelectedTime = freezed,
+    Object limitDateTime = freezed,
   }) {
     return _then(_Todo(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       isDone: isDone == freezed ? _value.isDone : isDone as bool,
-      rimitDateTime: rimitDateTime == freezed
-          ? _value.rimitDateTime
-          : rimitDateTime as DateTime,
+      isSelectedTime: isSelectedTime == freezed
+          ? _value.isSelectedTime
+          : isSelectedTime as bool,
+      limitDateTime: limitDateTime == freezed
+          ? _value.limitDateTime
+          : limitDateTime as DateTime,
     ));
   }
 }
@@ -117,10 +138,12 @@ class _$_Todo extends _Todo {
       {@required this.id,
       @required this.title,
       @required this.isDone,
-      this.rimitDateTime})
+      @required this.isSelectedTime,
+      this.limitDateTime})
       : assert(id != null),
         assert(title != null),
         assert(isDone != null),
+        assert(isSelectedTime != null),
         super._();
 
   @override
@@ -130,11 +153,13 @@ class _$_Todo extends _Todo {
   @override
   final bool isDone;
   @override
-  final DateTime rimitDateTime;
+  final bool isSelectedTime;
+  @override
+  final DateTime limitDateTime;
 
   @override
   String toString() {
-    return 'Todo(id: $id, title: $title, isDone: $isDone, rimitDateTime: $rimitDateTime)';
+    return 'Todo(id: $id, title: $title, isDone: $isDone, isSelectedTime: $isSelectedTime, limitDateTime: $limitDateTime)';
   }
 
   @override
@@ -147,9 +172,12 @@ class _$_Todo extends _Todo {
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.isDone, isDone) ||
                 const DeepCollectionEquality().equals(other.isDone, isDone)) &&
-            (identical(other.rimitDateTime, rimitDateTime) ||
+            (identical(other.isSelectedTime, isSelectedTime) ||
                 const DeepCollectionEquality()
-                    .equals(other.rimitDateTime, rimitDateTime)));
+                    .equals(other.isSelectedTime, isSelectedTime)) &&
+            (identical(other.limitDateTime, limitDateTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.limitDateTime, limitDateTime)));
   }
 
   @override
@@ -158,7 +186,8 @@ class _$_Todo extends _Todo {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(isDone) ^
-      const DeepCollectionEquality().hash(rimitDateTime);
+      const DeepCollectionEquality().hash(isSelectedTime) ^
+      const DeepCollectionEquality().hash(limitDateTime);
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +201,8 @@ abstract class _Todo extends Todo {
       {@required int id,
       @required String title,
       @required bool isDone,
-      DateTime rimitDateTime}) = _$_Todo;
+      @required bool isSelectedTime,
+      DateTime limitDateTime}) = _$_Todo;
 
   @override
   int get id;
@@ -181,7 +211,9 @@ abstract class _Todo extends Todo {
   @override
   bool get isDone;
   @override
-  DateTime get rimitDateTime;
+  bool get isSelectedTime;
+  @override
+  DateTime get limitDateTime;
   @override
   @JsonKey(ignore: true)
   _$TodoCopyWith<_Todo> get copyWith;

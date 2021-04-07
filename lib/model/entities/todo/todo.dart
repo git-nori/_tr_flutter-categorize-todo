@@ -9,7 +9,8 @@ abstract class Todo with _$Todo {
     @required int id,
     @required String title,
     @required bool isDone,
-    DateTime rimitDateTime,
+    @required bool isSelectedTime,
+    DateTime limitDateTime,
   }) = _Todo;
   Todo._();
 
