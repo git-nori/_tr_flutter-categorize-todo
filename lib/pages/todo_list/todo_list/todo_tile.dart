@@ -8,39 +8,35 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile({Key key, this.id}) : super(key: key);
-  final int id;
+  const TodoTile({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final formatter = DateFormat('M月dd日(E) HH:mm', 'ja_JP');
-    return StateNotifierProvider<TodoTileController, void>(
-      create: (_) => TodoTileController(todoId: id),
-      builder: (context, child) => Column(
-        children: [
-          ListTile(
-            leading: CircularCheckBox(
-              value: context.watch<TodoTileController>().todo.isDone,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              activeColor: Colors.grey.shade800,
-              onChanged: (bool x) =>
-                  context.read<TodoTileController>().toggleTodoIsDone(),
-            ),
-            title: Text(
-              context.watch<TodoTileController>().todo.title,
-              style: context.watch<TodoTileController>().todo.isDone
-                  ? kIsDoneTextStyle
-                  : null,
-            ),
-            subtitle: context.watch<TodoTileController>().todo.rimitDateTime ==
-                    null
-                ? null
-                : Text(formatter.format(
-                    context.watch<TodoTileController>().todo.rimitDateTime)),
+    return Column(
+      children: [
+        ListTile(
+          leading: CircularCheckBox(
+            value: context.watch<TodoTileController>().todo.isDone,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            activeColor: Colors.grey.shade800,
+            onChanged: (bool x) =>
+                context.read<TodoTileController>().toggleTodoIsDone(),
           ),
-          ZeroDivider(),
-        ],
-      ),
+          title: Text(
+            context.watch<TodoTileController>().todo.title,
+            style: context.watch<TodoTileController>().todo.isDone
+                ? kIsDoneTextStyle
+                : null,
+          ),
+          subtitle:
+              context.watch<TodoTileController>().todo.rimitDateTime == null
+                  ? null
+                  : Text(formatter.format(
+                      context.watch<TodoTileController>().todo.rimitDateTime)),
+        ),
+        ZeroDivider(),
+      ],
     );
   }
 }
