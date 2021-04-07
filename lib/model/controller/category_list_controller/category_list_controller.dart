@@ -58,8 +58,26 @@ final mockedList = [
 class CategoryListController extends StateNotifier<CategoryListState> {
   CategoryListController() : super(CategoryListState(categoryList: mockedList));
 
+  List<String> get allCategoryTitle =>
+      state.categoryList.map((e) => e.title).toList();
+
+  Todo getTodo({int todoId}) {
+    Todo todo;
+    for (final category in state.categoryList) {
+      for (final t in category.todoList) {
+        if (t.id == todoId) {
+          todo = t;
+        }
+      }
+    }
+    return todo;
+  }
+
+  Category getCategory({int categoryId}) =>
+      state.categoryList.firstWhere((element) => element.id == categoryId);
+
   void updateTodo({int categoryId, Todo todo}) {
-    final category = state.getCategory(categoryId: categoryId);
+    final category = getCategory(categoryId: categoryId);
     final updatedTodoList = category.todoList.map((e) {
       if (e.id != todo.id) {
         return e;
@@ -71,7 +89,7 @@ class CategoryListController extends StateNotifier<CategoryListState> {
   }
 
   void deleteCompletedTodoList({int categoryId}) {
-    final category = state.getCategory(categoryId: categoryId);
+    final category = getCategory(categoryId: categoryId);
     final todoIdList = category.completedTodoList.map((e) => e.id);
     final updatedTodoList = category.todoList
         .where((element) => !todoIdList.contains(element.id))
@@ -88,5 +106,21 @@ class CategoryListController extends StateNotifier<CategoryListState> {
       return category;
     }).toList();
     state = state.copyWith(categoryList: updatedCategoryList);
+  }
+
+  void toggleTodoIsDone({int categoryId, int todoId, bool isDone}) {
+    final updatedCategories = state.categoryList.map((e) {
+      if (e.id != categoryId) {
+        return e;
+      }
+      final todoList = e.todoList.map((todo) {
+        if (todo.id != todoId) {
+          return todo;
+        }
+        return todo.copyWith(isDone: isDone);
+      }).toList();
+      return e.copyWith(todoList: todoList);
+    }).toList();
+    state = state.copyWith(categoryList: updatedCategories);
   }
 }
