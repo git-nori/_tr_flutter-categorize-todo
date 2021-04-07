@@ -19,10 +19,9 @@ class TodoList extends StatelessWidget {
         return StateNotifierProvider<TodoTileController, void>(
           key: ValueKey(id),
           create: (_) => TodoTileController(todoId: id, categoryId: categoryId),
-          child: const TodoTile(),
+          child: TodoTile(key: ValueKey(id)),
         );
       },
-      // itemBuilder: (context, index) => TodoTile(todo: todoList[index]),
     );
   }
 }
