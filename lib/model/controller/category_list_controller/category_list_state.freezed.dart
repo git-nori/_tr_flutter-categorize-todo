@@ -105,9 +105,21 @@ class _$_CategoryListState extends _CategoryListState {
   @override
   final List<Category> categoryList;
 
+  bool _didallCategoryTitle = false;
+  List<String> _allCategoryTitle;
+
+  @override
+  List<String> get allCategoryTitle {
+    if (_didallCategoryTitle == false) {
+      _didallCategoryTitle = true;
+      _allCategoryTitle = categoryList.map((e) => e.title).toList();
+    }
+    return _allCategoryTitle;
+  }
+
   @override
   String toString() {
-    return 'CategoryListState(categoryList: $categoryList)';
+    return 'CategoryListState(categoryList: $categoryList, allCategoryTitle: $allCategoryTitle)';
   }
 
   @override
