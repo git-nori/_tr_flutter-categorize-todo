@@ -12,16 +12,24 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: todoList.length,
-      itemBuilder: (context, index) {
-        final id = todoList[index].id;
-        return StateNotifierProvider<TodoTileController, void>(
-          key: ValueKey(id),
-          create: (_) => TodoTileController(todoId: id, categoryId: categoryId),
-          child: TodoTile(key: ValueKey(id)),
-        );
-      },
-    );
+    return todoList.isEmpty
+        ? const Center(
+            child: Text(
+              'Todoはすべて完了しました',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          )
+        : ListView.builder(
+            itemCount: todoList.length,
+            itemBuilder: (context, index) {
+              final id = todoList[index].id;
+              return StateNotifierProvider<TodoTileController, void>(
+                key: ValueKey(id),
+                create: (_) =>
+                    TodoTileController(todoId: id, categoryId: categoryId),
+                child: TodoTile(key: ValueKey(id)),
+              );
+            },
+          );
   }
 }
