@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_todo/model/controller/category_list_controller/category_list_controller.dart';
-import 'package:flutter_firebase_todo/pages/todo_list/todo_list/todo_list.dart';
+import 'package:flutter_firebase_todo/pages/category_todo_list/todo_list/todo_list.dart';
 import 'package:flutter_firebase_todo/widget/colored_tab_bar.dart';
 import 'package:flutter_firebase_todo/widget/floating_action_button.dart';
 import 'package:provider/provider.dart';
 
-class TodoListPage extends StatefulWidget {
+class CategoryTodoListPage extends StatefulWidget {
   static const rootId = '/todo_list';
 
   @override
-  _TodoListPageState createState() => _TodoListPageState();
+  _CategoryTodoListPageState createState() => _CategoryTodoListPageState();
 }
 
-class _TodoListPageState extends State<TodoListPage>
+class _CategoryTodoListPageState extends State<CategoryTodoListPage>
     with TickerProviderStateMixin {
   TabController _tabController;
 

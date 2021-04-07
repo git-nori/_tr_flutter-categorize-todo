@@ -1,7 +1,7 @@
 import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_todo/consts/style.dart';
-import 'package:flutter_firebase_todo/pages/todo_list/todo_list/todo_tile_controller.dart';
+import 'package:flutter_firebase_todo/pages/category_todo_list/todo_list/todo_tile_controller.dart';
 import 'package:flutter_firebase_todo/widget/zero_divider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
