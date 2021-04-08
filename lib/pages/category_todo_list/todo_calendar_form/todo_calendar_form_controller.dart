@@ -23,7 +23,7 @@ class TodoCalendarFormController extends StateNotifier<TodoCalendarFormState>
   void setLimitedDate(DateTime val) {
     final sameTimeVal = val
         .add(Duration(hours: state.limitedDateTime.hour))
-        .add(Duration(hours: state.limitedDateTime.minute));
+        .add(Duration(minutes: state.limitedDateTime.minute));
     final diffDuration = sameTimeVal.difference(state.limitedDateTime);
     final limitedDateTime = state.limitedDateTime.add(diffDuration);
     state = state.copyWith(limitedDateTime: limitedDateTime);
